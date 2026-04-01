@@ -104,7 +104,24 @@ if (require.main === module) {
 
   const operation = args[0];
   const num1 = parseFloat(args[1]);
+  const binaryOps = ['add', 'subtract', 'multiply', 'divide', 'modulo', 'power'];
+
+  if (isNaN(num1)) {
+    console.error(`Error: '${args[1]}' is not a valid number`);
+    process.exit(1);
+  }
+
   const num2 = args[2] !== undefined ? parseFloat(args[2]) : undefined;
+  if (binaryOps.includes(operation)) {
+    if (args[2] === undefined) {
+      console.error(`Error: operation '${operation}' requires two numbers`);
+      process.exit(1);
+    }
+    if (isNaN(num2)) {
+      console.error(`Error: '${args[2]}' is not a valid number`);
+      process.exit(1);
+    }
+  }
 
   try {
     let result;
